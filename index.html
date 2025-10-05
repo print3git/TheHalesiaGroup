@@ -29,12 +29,24 @@
   </head>
   <!-- Brand palette update start -->
   <body class="font-sans bg-white text-[#0e1d28]">
-    <!-- Hero section start -->
-    <section class="w-full text-white bg-[#0e1d28] border-b border-white/10">
+    <!-- Modified Hero section start -->
+    <section class="w-full text-white bg-gradient-to-br from-[#0A1825] to-[#102a42] border-b border-white/10">
+      <style>
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      </style>
       <div class="max-w-6xl px-6 py-24 mx-auto md:px-8 lg:px-12 lg:py-32">
         <div class="flex flex-col items-center text-center gap-10 lg:flex-row lg:items-center lg:justify-between lg:text-left lg:gap-16">
           <!-- Modified hero logo sizing start -->
-          <div class="flex justify-center w-full lg:w-auto lg:justify-start">
+          <div class="flex justify-center w-full lg:w-auto lg:justify-start animate-[fadeIn_1s_ease-out]">
             <img
               src="./img/logo.png"
               alt="Halesia Group logo"
@@ -42,19 +54,19 @@
             />
           </div>
           <!-- Modified hero logo sizing end -->
-          <div class="max-w-2xl space-y-6">
-            <h1 class="text-3xl font-semibold sm:text-4xl lg:text-5xl">
+          <div class="max-w-2xl text-center lg:text-left">
+            <h1 class="text-5xl md:text-6xl font-semibold leading-tight text-white animate-[fadeIn_1s_ease-out]">
               Your Technical Partner for Growing Businesses.
             </h1>
-            <p class="text-base leading-relaxed text-gray-100 sm:text-lg">
+            <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-100 sm:text-lg lg:mx-0 animate-[fadeIn_1s_ease-out]">
               Halesia Group builds, automates, and maintains production-grade software for
               small and medium businesses around the world. Our team delivers reliable,
               scalable systems that support your growth at every stage.
             </p>
-            <div>
+            <div class="flex justify-center lg:justify-start animate-[fadeIn_1s_ease-out]">
               <a
                 href="#contact"
-                class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white transition rounded-xl bg-[#0f5f9f] hover:bg-[#0f5f9f]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0f5f9f] focus-visible:ring-offset-[#0e1d28]"
+                class="inline-flex items-center justify-center px-6 py-3 mt-8 text-base font-medium text-white transition-transform duration-200 bg-[#2b6cb0] rounded-lg hover:bg-[#3182ce] hover:shadow-lg hover:shadow-blue-900/40 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:-translate-y-0.5"
               >
                 Book a 20-Minute Call
               </a>
@@ -63,7 +75,7 @@
         </div>
       </div>
     </section>
-    <!-- Hero section end -->
+    <!-- Modified Hero section end -->
     <!-- What We Do section start -->
     <section class="w-full bg-white border-b border-[#0e1d28]/10">
       <div class="max-w-6xl px-6 py-24 mx-auto md:px-8 lg:px-12">

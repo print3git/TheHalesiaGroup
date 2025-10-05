@@ -1,8 +1,25 @@
 # TheHalesiaGroup
 
-This is the website for The Halesia Group. It should serve as a landing page for potential clients wanting us to develop software.
+This repository contains the static landing page for The Halesia Group.
 
-# Tech stack
-- Hosting: Cloudflare pages (CD)
-- Frontend: HTML + Tailwind
-- Backend: node.js
+## Setup
+
+```bash
+npm install
+```
+
+## Development
+
+Run TailwindCSS in watch mode to rebuild `style.css` as you edit HTML or CSS.
+
+```bash
+npm run dev
+```
+
+## Production build
+
+Generate a minified production build of `style.css`.
+
+```bash
+npm run build
+```

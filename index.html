@@ -720,6 +720,27 @@
       </div>
     </footer>
     <!-- Contact & Footer section end -->
+    <!-- Ensure hero is the initial viewport start -->
+    <script>
+      (function () {
+        if ("scrollRestoration" in history) {
+          history.scrollRestoration = "manual";
+        }
+
+        const resetScroll = () => {
+          if (!window.location.hash) {
+            window.scrollTo(0, 0);
+          }
+        };
+
+        if (document.readyState === "complete") {
+          resetScroll();
+        } else {
+          window.addEventListener("load", resetScroll, { once: true });
+        }
+      })();
+    </script>
+    <!-- Ensure hero is the initial viewport end -->
     <!-- How It Works animation script start -->
     <script>
       (function () {

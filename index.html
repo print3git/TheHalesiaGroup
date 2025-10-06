@@ -63,7 +63,18 @@
             <p class="mx-auto text-lg leading-relaxed text-gray-200 md:text-xl lg:mx-0 animate-[fadeInUp_0.9s_ease-out_0.2s_forwards] opacity-0">
               We help founders and operators launch dependable platforms, automate revenue-critical workflows, and keep systems stable as demand scales.
             </p>
-            <ul class="grid gap-4 text-left text-base text-gray-200 lg:grid-cols-2 animate-[fadeInUp_1s_ease-out_0.25s_forwards] opacity-0">
+            <div class="flex flex-col items-center gap-2 text-sm text-gray-300 md:flex-row md:justify-center lg:justify-start animate-[fadeInUp_1s_ease-out_0.25s_forwards] opacity-0">
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg>
+                <span>Direct access to senior engineers &amp; founders.</span>
+              </div>
+              <span class="hidden h-4 border-l border-white/20 md:inline"></span>
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg>
+                <span>Risk-free discovery sprint available in 2 weeks.</span>
+              </div>
+            </div>
+            <ul class="grid gap-4 text-left text-base text-gray-200 lg:grid-cols-2 animate-[fadeInUp_1s_ease-out_0.3s_forwards] opacity-0">
               <li class="flex items-start gap-3">
                 <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 mt-0.5 rounded-full bg-white/10">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -97,7 +108,7 @@
                 <span><strong class="font-semibold text-white">Transparent partnership</strong> with weekly demos &amp; async updates.</span>
               </li>
             </ul>
-            <div class="flex flex-col items-center gap-4 text-base animate-[fadeInUp_1.1s_ease-out_0.35s_forwards] opacity-0 lg:flex-row lg:items-center lg:gap-6">
+            <div class="flex flex-col items-center gap-4 text-base animate-[fadeInUp_1.1s_ease-out_0.4s_forwards] opacity-0 lg:flex-row lg:items-center lg:gap-6">
               <a
                 href="#contact"
                 class="inline-flex items-center justify-center px-6 py-3 font-semibold text-white transition duration-200 transform bg-[#1f3b56] rounded-lg shadow-lg shadow-black/10 hover:scale-105 hover:bg-[#1a324a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
@@ -114,11 +125,43 @@
                 </svg>
               </a>
             </div>
+            <p class="text-xs text-gray-400 animate-[fadeInUp_1.15s_ease-out_0.45s_forwards] opacity-0">We reply within one business day with a tailored next step.</p>
           </div>
         </div>
       </div>
     </section>
     <!-- End Hero section enhanced -->
+    <!-- Social proof section start -->
+    <section class="bg-white border-b border-[#0e1d28]/10">
+      <div class="max-w-6xl px-6 py-12 mx-auto md:px-8 lg:px-12">
+        <div class="grid items-center gap-10 md:grid-cols-2">
+          <div class="space-y-4">
+            <h2 class="text-2xl font-semibold tracking-tight text-[#0e1d28]">Trusted by teams shipping mission-critical platforms</h2>
+            <p class="text-sm leading-relaxed text-gray-700">
+              Teams rely on Halesia Group when they need a technical partner who understands go-to-market pressure, regulatory compliance, and the cost of downtime.
+            </p>
+            <p class="text-sm text-gray-600">
+              <strong class="text-[#0e1d28]">Featured metrics:</strong> 42% faster releases, 18 hrs/week saved through automation, 99.95% uptime on managed systems.
+            </p>
+          </div>
+          <div class="grid items-center justify-items-center grid-cols-2 gap-6 sm:grid-cols-4">
+            <figure class="flex items-center justify-center w-full h-24 p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <img src="./img/logo-client-1.png" alt="Client logo placeholder for manufacturing SaaS" class="object-contain h-full" />
+            </figure>
+            <figure class="flex items-center justify-center w-full h-24 p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <img src="./img/logo-client-2.png" alt="Client logo placeholder for marketplace scale-up" class="object-contain h-full" />
+            </figure>
+            <figure class="flex items-center justify-center w-full h-24 p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <img src="./img/logo-client-3.png" alt="Client logo placeholder for professional services" class="object-contain h-full" />
+            </figure>
+            <figure class="flex items-center justify-center w-full h-24 p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <img src="./img/logo-client-4.png" alt="Client logo placeholder for education technology" class="object-contain h-full" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Social proof section end -->
     <!-- What We Do section start -->
     <section id="why-us" class="w-full bg-white border-b border-[#0e1d28]/10">
       <div class="max-w-6xl px-6 py-24 mx-auto md:px-8 lg:px-12">
@@ -207,6 +250,9 @@
             </dl>
           </div>
           <aside class="p-8 space-y-6 transition border rounded-3xl border-[#0e1d28]/10 bg-white shadow-lg shadow-[#0e1d28]/5">
+            <figure class="overflow-hidden rounded-2xl border border-[#0e1d28]/10">
+              <img src="./img/case-study-marketplace.jpg" alt="Product team collaborating around marketplace dashboards" class="object-cover w-full h-48" />
+            </figure>
             <h3 class="text-2xl font-semibold text-[#0e1d28]">Featured engagement</h3>
             <p class="text-base leading-relaxed text-gray-700">
               <strong class="text-[#0e1d28]">B2B marketplace rebuild.</strong> We partnered with a global procurement startup to replace fragile spreadsheets with a production-grade platform. After 14 weeks:
@@ -282,6 +328,83 @@
       </div>
     </section>
     <!-- Who We Help section end -->
+    <!-- Conversion assets section start -->
+    <section class="w-full bg-[#f5f8fb] border-b border-[#0e1d28]/10">
+      <div class="max-w-6xl px-6 py-24 mx-auto md:px-8 lg:px-12">
+        <div class="grid gap-12 items-start lg:items-stretch lg:grid-cols-[1.1fr_0.9fr]">
+          <div class="space-y-6">
+            <h2 class="text-3xl font-semibold tracking-tight text-[#0e1d28] sm:text-4xl">
+              Start with a Clarity Diagnostic
+            </h2>
+            <p class="text-base leading-relaxed text-gray-700">
+              Share your biggest blocker and we’ll send back a personalised systems diagnostic within two business days—including quick wins you can action internally and the roadmap we’d execute together.
+            </p>
+            <ul class="space-y-3 text-sm text-gray-700">
+              <li class="flex gap-3">
+                <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 mt-0.5 rounded-full bg-[#0e1d28]/10 text-[#0e1d28]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                  </svg>
+                </span>
+                <span>Includes technical architecture map, risk audit, and ROI forecast.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 mt-0.5 rounded-full bg-[#0e1d28]/10 text-[#0e1d28]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                  </svg>
+                </span>
+                <span>Delivered as a recorded walkthrough you can share with your leadership team.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 mt-0.5 rounded-full bg-[#0e1d28]/10 text-[#0e1d28]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                  </svg>
+                </span>
+                <span>Free if you decide we’re not the right fit.</span>
+              </li>
+            </ul>
+            <div class="p-6 space-y-4 transition border rounded-2xl border-[#0e1d28]/15 bg-white shadow-sm">
+              <form action="#contact" class="space-y-4">
+                <div>
+                  <label for="diagnostic-email" class="block text-xs font-semibold tracking-wide text-[#0e1d28]/80 uppercase">Work email</label>
+                  <input id="diagnostic-email" type="email" placeholder="you@company.com" class="w-full px-4 py-3 mt-2 text-sm border rounded-lg border-[#0e1d28]/20 focus:outline-none focus:ring-2 focus:ring-[#0e1d28]" />
+                </div>
+                <div>
+                  <label for="diagnostic-focus" class="block text-xs font-semibold tracking-wide text-[#0e1d28]/80 uppercase">Top priority</label>
+                  <textarea id="diagnostic-focus" rows="3" placeholder="e.g. Replace legacy quoting tool, automate onboarding" class="w-full px-4 py-3 mt-2 text-sm border rounded-lg border-[#0e1d28]/20 focus:outline-none focus:ring-2 focus:ring-[#0e1d28]"></textarea>
+                </div>
+                <button type="submit" class="inline-flex items-center justify-center w-full gap-2 px-5 py-3 text-sm font-semibold text-white transition bg-[#1f3b56] rounded-lg hover:bg-[#1a324a]">
+                  Request my diagnostic
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                  </svg>
+                </button>
+                <p class="text-xs leading-relaxed text-gray-500">We reserve two diagnostic slots per week to ensure senior attention.</p>
+              </form>
+            </div>
+          </div>
+          <div class="flex flex-col h-full gap-6">
+            <div
+              role="img"
+              aria-label="Placeholder for future image 1"
+              class="flex flex-1 items-center justify-center w-full min-h-[320px] rounded-2xl border-2 border-dashed border-[#0e1d28]/20 bg-white text-sm font-semibold uppercase tracking-[0.35em] text-[#0e1d28]/50"
+            >
+              image 1
+            </div>
+            <div
+              role="img"
+              aria-label="Placeholder for future image 2"
+              class="flex flex-1 items-center justify-center w-full min-h-[320px] rounded-2xl border-2 border-dashed border-[#0e1d28]/20 bg-white text-sm font-semibold uppercase tracking-[0.35em] text-[#0e1d28]/50"
+            >
+              image 2
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Conversion assets section end -->
     <!-- How It Works section start -->
     <section class="w-full bg-white border-b border-[#0e1d28]/10" data-how-it-works>
       <div class="max-w-6xl px-6 py-24 mx-auto md:px-8 lg:px-12">
@@ -432,6 +555,70 @@
       </div>
     </section>
     <!-- CTA section end -->
+    <!-- Risk reversal & FAQ section start -->
+    <section class="w-full bg-[#f5f8fb] border-b border-[#0e1d28]/10">
+      <div class="max-w-6xl px-6 py-24 mx-auto md:px-8 lg:px-12">
+        <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div class="p-8 space-y-6 bg-white border rounded-3xl shadow-sm border-[#0e1d28]/10">
+            <figure class="overflow-hidden rounded-2xl border border-[#0e1d28]/10">
+              <img src="./img/guarantee-team.jpg" alt="Halesia Group team collaborating with client stakeholders" class="object-cover w-full h-48" />
+            </figure>
+            <h3 class="text-2xl font-semibold text-[#0e1d28]">Delivery assurance</h3>
+            <p class="text-sm leading-relaxed text-gray-700">
+              If we don’t deliver the agreed milestone in the first 30 days, we’ll keep working at no cost until we do. No lock-in retainers, no surprise invoices.
+            </p>
+            <ul class="space-y-3 text-sm text-gray-700">
+              <li class="flex gap-3">
+                <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 mt-0.5 rounded-full bg-[#0e1d28]/10 text-[#0e1d28]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                  </svg>
+                </span>
+                <span>Weekly executive summary with burn-down, risks, and decisions needed.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 mt-0.5 rounded-full bg-[#0e1d28]/10 text-[#0e1d28]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                  </svg>
+                </span>
+                <span>Fixed-fee discovery, then flexible delivery models that match your budget cadence.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 mt-0.5 rounded-full bg-[#0e1d28]/10 text-[#0e1d28]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                  </svg>
+                </span>
+                <span>Optional co-branded success story to fuel your internal stakeholder buy-in.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="space-y-8">
+            <h3 class="text-3xl font-semibold tracking-tight text-[#0e1d28]">Frequently asked questions</h3>
+            <div class="space-y-6">
+              <details class="p-6 space-y-2 bg-white border rounded-2xl border-[#0e1d28]/10">
+                <summary class="text-base font-semibold text-[#0e1d28] cursor-pointer">What does working with a founder-led team look like?</summary>
+                <p class="text-sm leading-relaxed text-gray-700">You’ll work directly with the founders during strategy, architecture, and critical delivery phases. As the engagement scales, we plug in trusted specialists while staying accountable for quality, timelines, and communication.</p>
+              </details>
+              <details class="p-6 space-y-2 bg-white border rounded-2xl border-[#0e1d28]/10">
+                <summary class="text-base font-semibold text-[#0e1d28] cursor-pointer">How do you price projects?</summary>
+                <p class="text-sm leading-relaxed text-gray-700">Discovery sprints are fixed-fee. Build and maintenance work can run as milestone-based, dedicated pods, or hybrid retainers depending on your internal capacity. Every proposal includes a timeline, investment range, and ROI benchmarks.</p>
+              </details>
+              <details class="p-6 space-y-2 bg-white border rounded-2xl border-[#0e1d28]/10">
+                <summary class="text-base font-semibold text-[#0e1d28] cursor-pointer">Can you work with our existing engineers?</summary>
+                <p class="text-sm leading-relaxed text-gray-700">Yes—we regularly lead blended teams. We align ceremonies, documentation, and tooling so your team can take over smoothly or continue collaborating with us long-term.</p>
+              </details>
+              <details class="p-6 space-y-2 bg-white border rounded-2xl border-[#0e1d28]/10">
+                <summary class="text-base font-semibold text-[#0e1d28] cursor-pointer">What happens after launch?</summary>
+                <p class="text-sm leading-relaxed text-gray-700">Every engagement includes an operational handbook, monitoring setup, and optional success metrics dashboard. You choose between ongoing maintenance support or a structured handover.</p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Risk reversal & FAQ section end -->
     <!-- Contact & Footer section start -->
     <section id="contact" class="w-full text-white border-t border-white/10 bg-[#0e1d28]">
       <div class="max-w-6xl px-6 py-24 mx-auto md:px-8 lg:px-12">

@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "npx tailwindcss -i ./src/styles/tailwind.css -o ./style.css --watch --postcss",
-    "build": "npx tailwindcss -i ./src/styles/tailwind.css -o ./style.css --minify --postcss"
+    "dev": "npx tailwindcss -i ./src/styles/style.css -o ./style.css --watch --postcss",
+    "build": "npx tailwindcss -i ./src/styles/style.css -o ./style.css --minify --postcss"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",

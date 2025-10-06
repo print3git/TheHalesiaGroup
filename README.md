@@ -10,7 +10,7 @@ npm install
 
 ## Development
 
-Run TailwindCSS in watch mode to rebuild `style.css` as you edit HTML or CSS.
+Run TailwindCSS in watch mode to rebuild `style.css` as you edit `src/styles/tailwind.css` or HTML templates.
 
 ```bash
 npm run dev
@@ -18,7 +18,7 @@ npm run dev
 
 ## Production build
 
-Generate a minified production build of `style.css`.
+Generate a minified production build of `style.css` from `src/styles/tailwind.css`.
 
 ```bash
 npm run build

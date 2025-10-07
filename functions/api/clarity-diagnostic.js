@@ -1,6 +1,7 @@
 import { createFormHandler } from './_form-handler.js';
 
 const handler = createFormHandler({
+  // Reply-To is now set dynamically from the visitor's email in the shared form handler.
   requiredFields: ['email', 'priority'],
   subject({ sanitize }, data) {
     const email = sanitize(data.email) || 'unknown email';

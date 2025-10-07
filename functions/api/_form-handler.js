@@ -154,11 +154,15 @@ export function createFormHandler({ requiredFields, subject, prepareContent }) {
     const computedSubject =
       typeof subject === 'function' ? subject({ sanitize }, data) : String(subject || 'Website form submission');
 
+    const replyToEmail = sanitize(data.email);
+
     try {
       await sendEmail(env, {
         subject: computedSubject,
         text: content.text,
         html: content.html,
+        // Populate the Reply-To header with the visitor's email so responses go directly to them.
+        replyTo: replyToEmail,
       });
 
       return new Response(JSON.stringify({ ok: true }), {

@@ -567,106 +567,53 @@
     <!-- How It Works animation script end -->
     <script>
       (function () {
-        const forms = [
-          {
-            element: document.querySelector('[data-form="diagnostic"]'),
-            endpoint: '/api/clarity-diagnostic',
-          },
-          {
-            element: document.querySelector('[data-form="contact"]'),
-            endpoint: '/api/clarity-call',
-          },
-        ].filter(({ element }) => Boolean(element));
+        const forms = Array.from(document.querySelectorAll('[data-form]'));
 
         if (!forms.length) return;
 
-        const STATUS_CLASSES = {
-          idle: ['hidden'],
-          loading: ['text-[#0e1d28]/70'],
-          success: ['text-green-600'],
-          error: ['text-red-600'],
-        };
-
-        const resetStatusClasses = (statusElement) => {
-          statusElement.classList.remove(
-            ...new Set(
-              Object.values(STATUS_CLASSES)
-                .flat()
-                .filter((className) => className !== 'hidden')
-            )
-          );
-        };
-
-        const updateStatus = (statusElement, type, message) => {
-          if (!statusElement) return;
-
-          resetStatusClasses(statusElement);
-
-          statusElement.textContent = message;
-          statusElement.classList.remove('hidden');
-          statusElement.classList.add(...(STATUS_CLASSES[type] || []));
-
-          if (type === 'idle') {
-            statusElement.textContent = '';
-          }
-        };
-
-        const simulatePostRequest = (url, payload) => {
-          // TODO: Replace this simulation with a real fetch POST request to `url` when the backend is ready.
+        const simulateSubmission = () => {
+          // TODO: Replace this simulated promise with a real fetch() call to the backend.
           return new Promise((resolve, reject) => {
             window.setTimeout(() => {
-              const shouldSucceed = Math.random() > 0.15;
-              if (shouldSucceed) {
-                resolve({ ok: true, data: payload });
+              const isSuccess = Math.random() > 0.2;
+              if (isSuccess) {
+                resolve();
               } else {
-                reject(new Error('Simulated network error'));
+                reject(new Error('Simulated error'));
               }
             }, 1200);
           });
         };
 
-        forms.forEach(({ element: form, endpoint }) => {
+        forms.forEach((form) => {
           const statusElement = form.querySelector('[data-form-status]');
           const submitButton = form.querySelector('[type="submit"]');
-          const defaultButtonContent = submitButton ? submitButton.innerHTML : '';
 
-          const setButtonState = (isSubmitting) => {
-            if (!submitButton) return;
-
-            if (isSubmitting) {
-              submitButton.dataset.originalContent = defaultButtonContent;
-              submitButton.innerHTML = 'Sending…';
-              submitButton.disabled = true;
-              submitButton.classList.add('opacity-75', 'cursor-not-allowed');
-            } else {
-              submitButton.innerHTML = submitButton.dataset.originalContent || defaultButtonContent;
-              submitButton.disabled = false;
-              submitButton.classList.remove('opacity-75', 'cursor-not-allowed');
-            }
-          };
-
-          form.addEventListener('submit', async (event) => {
+          form.addEventListener('submit', (event) => {
             event.preventDefault();
 
-            const formData = new FormData(form);
-            const payload = Object.fromEntries(formData.entries());
+            if (!statusElement) return;
 
-            updateStatus(statusElement, 'loading', 'Sending your request…');
-            setButtonState(true);
+            statusElement.textContent = 'Sending…';
+            statusElement.classList.remove('hidden');
 
-            try {
-              await simulatePostRequest(endpoint, payload);
-              updateStatus(statusElement, 'success', 'Thanks! We will be in touch shortly.');
-              form.reset();
-            } catch (error) {
-              updateStatus(
-                statusElement,
-                'error',
-                'Something went wrong. Please try again in a moment.'
-              );
-            } finally {
-              setButtonState(false);
+            if (submitButton) {
+              submitButton.disabled = true;
             }
+
+            simulateSubmission()
+              .then(() => {
+                statusElement.textContent = 'Message sent successfully.';
+                form.reset();
+              })
+              .catch(() => {
+                statusElement.textContent = 'There was an error. Please try again.';
+              })
+              .finally(() => {
+                if (submitButton) {
+                  submitButton.disabled = false;
+                }
+              });
           });
         });
       })();

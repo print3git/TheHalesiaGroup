@@ -587,128 +587,39 @@
     <!-- How It Works animation script end -->
     <script>
       (function () {
-        const forms = [
-          {
-            element: document.querySelector('[data-form="diagnostic"]'),
-            endpoint: '/api/clarity-diagnostic',
-          },
-          {
-            element: document.querySelector('[data-form="contact"]'),
-            endpoint: '/api/clarity-call',
-          },
-        ].filter(({ element }) => Boolean(element));
-
+        const forms = document.querySelectorAll('[data-form]');
         if (!forms.length) return;
 
-        const STATUS_CLASSES = {
-          idle: ['hidden'],
-          loading: ['text-[#0e1d28]/70'],
-          success: ['text-green-600'],
-          error: ['text-red-600'],
-        };
-
-        const resetStatusClasses = (statusElement) => {
-          statusElement.classList.remove(
-            ...new Set(
-              Object.values(STATUS_CLASSES)
-                .flat()
-                .filter((className) => className !== 'hidden')
-            )
-          );
-        };
-
-        const updateStatus = (statusElement, type, message) => {
-          if (!statusElement) return;
-
-          resetStatusClasses(statusElement);
-
-          statusElement.textContent = message;
-          statusElement.classList.remove('hidden');
-          statusElement.classList.add(...(STATUS_CLASSES[type] || []));
-
-          if (type === 'idle') {
-            statusElement.textContent = '';
-          }
-        };
-
-        const submitForm = async (url, payload) => {
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
+        const simulateSubmission = () =>
+          new Promise((resolve) => {
+            window.setTimeout(resolve, 1500);
           });
 
-          let responseBody = null;
-
-          try {
-            responseBody = await response.json();
-          } catch (error) {
-            responseBody = null;
-          }
-
-          if (!response.ok) {
-            const message =
-              (responseBody && (responseBody.error || responseBody.message)) ||
-              `Request failed with status ${response.status}`;
-
-            const requestError = new Error(message);
-            requestError.status = response.status;
-            requestError.data = responseBody;
-            throw requestError;
-          }
-
-          return responseBody;
-        };
-
-        forms.forEach(({ element: form, endpoint }) => {
+        forms.forEach((form) => {
           const statusElement = form.querySelector('[data-form-status]');
           const submitButton = form.querySelector('[type="submit"]');
-          const defaultButtonContent = submitButton ? submitButton.innerHTML : '';
 
-          const setButtonState = (isSubmitting) => {
-            if (!submitButton) return;
-
-            if (isSubmitting) {
-              submitButton.dataset.originalContent = defaultButtonContent;
-              submitButton.innerHTML = 'Sending…';
-              submitButton.disabled = true;
-              submitButton.classList.add('opacity-75', 'cursor-not-allowed');
-            } else {
-              submitButton.innerHTML = submitButton.dataset.originalContent || defaultButtonContent;
-              submitButton.disabled = false;
-              submitButton.classList.remove('opacity-75', 'cursor-not-allowed');
-            }
-          };
+          if (!statusElement || !submitButton) {
+            return;
+          }
 
           form.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formData = new FormData(form);
-            const payload = Object.fromEntries(formData.entries());
-
-            updateStatus(statusElement, 'loading', 'Sending your request…');
-            setButtonState(true);
+            statusElement.textContent = 'Sending…';
+            statusElement.classList.remove('hidden');
+            submitButton.disabled = true;
 
             try {
-              const responseBody = await submitForm(endpoint, payload);
-              const successMessage =
-                (responseBody && (responseBody.message || responseBody.success)) ||
-                'Thanks! We will be in touch shortly.';
+              // TODO: Replace simulateSubmission with a real fetch() call to the backend.
+              await simulateSubmission();
 
-              updateStatus(statusElement, 'success', successMessage);
+              statusElement.textContent = 'Message sent successfully.';
               form.reset();
             } catch (error) {
-              const errorMessage =
-                (error && error.message) || 'Something went wrong. Please try again in a moment.';
-              updateStatus(
-                statusElement,
-                'error',
-                errorMessage
-              );
+              statusElement.textContent = 'There was an error. Please try again.';
             } finally {
-              setButtonState(false);
+              submitButton.disabled = false;
             }
           });
         });

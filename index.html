@@ -590,11 +590,6 @@
         const forms = document.querySelectorAll('[data-form]');
         if (!forms.length) return;
 
-        const simulateSubmission = () =>
-          new Promise((resolve) => {
-            window.setTimeout(resolve, 1500);
-          });
-
         forms.forEach((form) => {
           const statusElement = form.querySelector('[data-form-status]');
           const submitButton = form.querySelector('[type="submit"]');
@@ -611,8 +606,53 @@
             submitButton.disabled = true;
 
             try {
-              // TODO: Replace simulateSubmission with a real fetch() call to the backend.
-              await simulateSubmission();
+              const formType = form.getAttribute('data-form');
+              const endpointMap = {
+                diagnostic: '/api/clarity-diagnostic',
+                contact: '/api/clarity-call',
+              };
+
+              const endpoint = endpointMap[formType];
+
+              if (!endpoint) {
+                throw new Error('Unsupported form submission.');
+              }
+
+              const formData = new FormData(form);
+              const payload = {};
+
+              formData.forEach((value, key) => {
+                if (Object.prototype.hasOwnProperty.call(payload, key)) {
+                  const currentValue = payload[key];
+
+                  if (Array.isArray(currentValue)) {
+                    currentValue.push(value);
+                  } else {
+                    payload[key] = [currentValue, value];
+                  }
+                } else {
+                  payload[key] = value;
+                }
+              });
+
+              // Submit the form data to the backend API endpoints.
+              const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+              });
+
+              const contentType = response.headers.get('content-type') || '';
+
+              if (contentType.includes('application/json')) {
+                await response.json().catch(() => undefined);
+              }
+
+              if (!response.ok) {
+                throw new Error('Request failed');
+              }
 
               statusElement.textContent = 'Message sent successfully.';
               form.reset();

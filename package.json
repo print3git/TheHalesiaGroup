@@ -6,9 +6,6 @@
     "dev": "npx tailwindcss -i ./src/styles/style.css -o ./style.css --watch --postcss",
     "build": "npx tailwindcss -i ./src/styles/style.css -o ./style.css --minify --postcss"
   },
-  "dependencies": {
-    "nodemailer": "^6.9.11"
-  },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.35",

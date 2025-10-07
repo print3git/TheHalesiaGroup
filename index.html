@@ -280,7 +280,7 @@
               </li>
             </ul>
             <div class="p-6 space-y-4 transition border rounded-2xl border-[#0e1d28]/15 bg-white shadow-sm">
-              <form class="space-y-4" data-form="diagnostic" method="post" name="clarity-diagnostic">
+              <form class="space-y-4" data-form="diagnostic" method="post" action="/api/clarity-diagnostic" name="clarity-diagnostic">
                 <div class="hidden" aria-hidden="true">
                   <label for="diagnostic-website" class="sr-only">Website</label>
                   <input
@@ -472,7 +472,7 @@
               </a>
             </div>
           </div>
-          <form class="flex flex-col h-full gap-4 p-6 bg-white border rounded-3xl shadow-xl border-white/10 shadow-black/10" name="contact" method="post" data-form="contact">
+          <form class="flex flex-col h-full gap-4 p-6 bg-white border rounded-3xl shadow-xl border-white/10 shadow-black/10" name="contact" method="post" action="/api/clarity-call" data-form="contact">
             <div class="hidden" aria-hidden="true">
               <label for="contact-website" class="sr-only">Website</label>
               <input
@@ -606,14 +606,7 @@
             submitButton.disabled = true;
 
             try {
-              const formType = form.getAttribute('data-form');
-              const endpointMap = {
-                diagnostic: '/api/clarity-diagnostic',
-                contact: '/api/clarity-call',
-              };
-
-              const endpoint = endpointMap[formType];
-
+              const endpoint = form.getAttribute('action');
               if (!endpoint) {
                 throw new Error('Unsupported form submission.');
               }
@@ -645,18 +638,20 @@
               });
 
               const contentType = response.headers.get('content-type') || '';
+              let result;
 
               if (contentType.includes('application/json')) {
-                await response.json().catch(() => undefined);
+                result = await response.json().catch(() => undefined);
               }
 
-              if (!response.ok) {
-                throw new Error('Request failed');
+              if (!response.ok || (result && result.ok === false)) {
+                throw new Error((result && result.error) || 'Request failed');
               }
 
               statusElement.textContent = 'Message sent successfully.';
               form.reset();
             } catch (error) {
+              console.error(error);
               statusElement.textContent = 'There was an error. Please try again.';
             } finally {
               submitButton.disabled = false;

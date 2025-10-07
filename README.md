@@ -26,11 +26,4 @@ npm run build
 
 ## Cloudflare deployment
 
-The site is configured for Cloudflare Pages with Functions-based API routes in `functions/api`. To enable email delivery for
-the Clarity Diagnostic and Clarity Call forms:
-
-- Set the `ZOHO_USER` and `ZOHO_PASS` secrets in your Cloudflare project settings (for both Pages and Workers environments).
-- Deploy with those secrets available so the serverless functions can authenticate to Zoho's SMTP service.
-
-Each form submits via POST to `/api/clarity-diagnostic` or `/api/clarity-call`, which will validate the payload, reject spam
-via a honeypot field, and send the message to `info@halesiagroup.com` using the configured Zoho credentials.
+Set the `RESEND_API_KEY` secret in your Cloudflare Pages project settings so Functions can authenticate to Resend. The Clarity Diagnostic and Clarity Call forms post to `/api/clarity-diagnostic` and `/api/clarity-call`. Emails are sent from Resend's authenticated domain (`Website Forms <onboarding@resend.dev>`) with `Reply-To: info@halesiagroup.com`.

@@ -1,52 +1,58 @@
-import nodemailer from 'nodemailer';
+const RESEND_API_URL = 'https://api.resend.com/emails';
+const FROM_ADDRESS = 'Website Forms <onboarding@resend.dev>';
+const TO_ADDRESS = 'info@halesiagroup.com';
+const REPLY_TO = 'info@halesiagroup.com';
 
-// TODO: Set the ZOHO_USER and ZOHO_PASS secrets in your hosting provider's
-// environment configuration (for example, Cloudflare Pages project settings)
-// before deploying these functions.
+async function parseError(response) {
+  const contentType = response.headers.get('content-type') || '';
 
-let cachedTransporter;
-let cachedUser;
+  if (contentType.includes('application/json')) {
+    const body = await response.json().catch(() => null);
+    if (body && body.error) {
+      if (typeof body.error === 'string') {
+        return body.error;
+      }
+      if (typeof body.error.message === 'string') {
+        return body.error.message;
+      }
+    }
+  } else {
+    const text = await response.text().catch(() => '');
+    if (text) {
+      return text.slice(0, 200);
+    }
+  }
 
-function createTransporter(env) {
-  const username = env?.ZOHO_USER;
-  const password = env?.ZOHO_PASS;
+  return `Email provider responded with status ${response.status}`;
+}
 
-  if (!username || !password) {
+export async function sendEmail(env, { subject, text, html }) {
+  const apiKey = env?.RESEND_API_KEY;
+
+  if (!apiKey) {
     throw new Error('Email service credentials are not configured.');
   }
 
-  if (cachedTransporter && cachedUser === username) {
-    return cachedTransporter;
-  }
-
-  cachedUser = username;
-  cachedTransporter = nodemailer.createTransport({
-    host: 'smtp.zoho.eu',
-    port: 465,
-    secure: true,
-    auth: {
-      user: username,
-      pass: password,
+  const response = await fetch(RESEND_API_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
     },
+    body: JSON.stringify({
+      from: FROM_ADDRESS,
+      to: TO_ADDRESS,
+      subject,
+      text,
+      html,
+      reply_to: REPLY_TO,
+    }),
   });
 
-  return cachedTransporter;
-}
-
-export async function sendEmail(env, { subject, text, html, replyTo }) {
-  const transporter = createTransporter(env);
-
-  const message = {
-    from: `Halesia Group <${env.ZOHO_USER}>`,
-    to: 'info@halesiagroup.com',
-    subject,
-    text,
-    html,
-  };
-
-  if (replyTo) {
-    message.replyTo = replyTo;
+  if (!response.ok) {
+    const message = await parseError(response);
+    throw new Error(message);
   }
 
-  return transporter.sendMail(message);
+  return response.json().catch(() => null);
 }

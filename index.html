@@ -281,6 +281,16 @@
             </ul>
             <div class="p-6 space-y-4 transition border rounded-2xl border-[#0e1d28]/15 bg-white shadow-sm">
               <form class="space-y-4" data-form="diagnostic">
+                <div class="hidden" aria-hidden="true">
+                  <label for="diagnostic-website" class="sr-only">Website</label>
+                  <input
+                    id="diagnostic-website"
+                    type="text"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
+                  />
+                </div>
                 <div>
                   <label for="diagnostic-email" class="block text-xs font-semibold tracking-wide text-[#0e1d28]/80 uppercase">Work email</label>
                   <input
@@ -463,6 +473,16 @@
             </div>
           </div>
           <form class="flex flex-col h-full gap-4 p-6 bg-white border rounded-3xl shadow-xl border-white/10 shadow-black/10" name="contact" method="post" data-form="contact">
+            <div class="hidden" aria-hidden="true">
+              <label for="contact-website" class="sr-only">Website</label>
+              <input
+                id="contact-website"
+                type="text"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
             <div class="grid gap-3 sm:grid-cols-2">
               <div>
                 <label for="name" class="block text-sm font-semibold text-[#0e1d28]">Name</label>
@@ -611,18 +631,35 @@
           }
         };
 
-        const simulatePostRequest = (url, payload) => {
-          // TODO: Replace this simulation with a real fetch POST request to `url` when the backend is ready.
-          return new Promise((resolve, reject) => {
-            window.setTimeout(() => {
-              const shouldSucceed = Math.random() > 0.15;
-              if (shouldSucceed) {
-                resolve({ ok: true, data: payload });
-              } else {
-                reject(new Error('Simulated network error'));
-              }
-            }, 1200);
+        const submitForm = async (url, payload) => {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
           });
+
+          let responseBody = null;
+
+          try {
+            responseBody = await response.json();
+          } catch (error) {
+            responseBody = null;
+          }
+
+          if (!response.ok) {
+            const message =
+              (responseBody && (responseBody.error || responseBody.message)) ||
+              `Request failed with status ${response.status}`;
+
+            const requestError = new Error(message);
+            requestError.status = response.status;
+            requestError.data = responseBody;
+            throw requestError;
+          }
+
+          return responseBody;
         };
 
         forms.forEach(({ element: form, endpoint }) => {
@@ -655,14 +692,20 @@
             setButtonState(true);
 
             try {
-              await simulatePostRequest(endpoint, payload);
-              updateStatus(statusElement, 'success', 'Thanks! We will be in touch shortly.');
+              const responseBody = await submitForm(endpoint, payload);
+              const successMessage =
+                (responseBody && (responseBody.message || responseBody.success)) ||
+                'Thanks! We will be in touch shortly.';
+
+              updateStatus(statusElement, 'success', successMessage);
               form.reset();
             } catch (error) {
+              const errorMessage =
+                (error && error.message) || 'Something went wrong. Please try again in a moment.';
               updateStatus(
                 statusElement,
                 'error',
-                'Something went wrong. Please try again in a moment.'
+                errorMessage
               );
             } finally {
               setButtonState(false);

@@ -2,7 +2,10 @@ import { createFormHandler } from './_form-handler.js';
 
 const handler = createFormHandler({
   requiredFields: ['name', 'email', 'goal'],
-  subject: 'New Clarity Call Request',
+  subject({ sanitize }, data) {
+    const email = sanitize(data.email) || 'unknown email';
+    return `Clarity Call Request from ${email}`;
+  },
   prepareContent({ sanitize, escapeHtml }, data) {
     const name = sanitize(data.name);
     const email = sanitize(data.email);

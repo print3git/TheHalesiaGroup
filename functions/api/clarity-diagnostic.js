@@ -2,7 +2,10 @@ import { createFormHandler } from './_form-handler.js';
 
 const handler = createFormHandler({
   requiredFields: ['email', 'priority'],
-  subject: 'New Clarity Diagnostic Request',
+  subject({ sanitize }, data) {
+    const email = sanitize(data.email) || 'unknown email';
+    return `Clarity Diagnostic Request from ${email}`;
+  },
   prepareContent({ sanitize, escapeHtml }, data) {
     const email = sanitize(data.email);
     const priority = sanitize(data.priority);

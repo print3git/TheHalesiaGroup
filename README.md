@@ -23,3 +23,7 @@ Generate a minified production build of `style.css` from `src/styles/tailwind.cs
 ```bash
 npm run build
 ```
+
+## Cloudflare deployment
+
+Set the `RESEND_API_KEY` secret in your Cloudflare Pages project settings so Functions can authenticate to Resend. The Clarity Diagnostic and Clarity Call forms post to `/api/clarity-diagnostic` and `/api/clarity-call`. Emails are sent from Resend's authenticated domain (`Website Forms <onboarding@resend.dev>`) with `Reply-To: info@halesiagroup.com`.

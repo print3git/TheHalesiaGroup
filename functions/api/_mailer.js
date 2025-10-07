@@ -1,7 +1,7 @@
 const RESEND_API_URL = 'https://api.resend.com/emails';
 const FROM_ADDRESS = 'Website Forms <onboarding@resend.dev>';
 const TO_ADDRESS = 'info@halesiagroup.com';
-const REPLY_TO = 'info@halesiagroup.com';
+const DEFAULT_REPLY_TO = 'info@halesiagroup.com';
 
 async function parseError(response) {
   const contentType = response.headers.get('content-type') || '';
@@ -26,7 +26,7 @@ async function parseError(response) {
   return `Email provider responded with status ${response.status}`;
 }
 
-export async function sendEmail(env, { subject, text, html }) {
+export async function sendEmail(env, { subject, text, html, replyTo }) {
   const apiKey = env?.RESEND_API_KEY;
 
   if (!apiKey) {
@@ -45,7 +45,7 @@ export async function sendEmail(env, { subject, text, html }) {
       subject,
       text,
       html,
-      reply_to: REPLY_TO,
+      reply_to: replyTo || DEFAULT_REPLY_TO,
     }),
   });
 
